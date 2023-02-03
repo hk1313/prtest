@@ -1,0 +1,34 @@
+name: PR test
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    # Add below if condition
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run tests
+        run: |
+          echo "tests run"
+          echo "${GITHUB_CONTEXT}"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build 
+        run: |
+          echo "Build"
+          echo "${GITHUB_CONTEXT}"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
