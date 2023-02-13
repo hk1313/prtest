@@ -9,17 +9,16 @@ on:
 
 jobs:
   tests:
+    if: |
+      !(github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+
     runs-on: ubuntu-latest
-    # Add below if condition
     steps:
       - uses: actions/checkout@v3
 
       - name: Run tests
         run: |
           echo "tests run"
-          echo "${GITHUB_CONTEXT}"
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
 
   build:
     runs-on: ubuntu-latest
@@ -28,7 +27,4 @@ jobs:
 
       - name: Build 
         run: |
-          echo "Build"
-          echo "${GITHUB_CONTEXT}"
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+          echo "Build"          
