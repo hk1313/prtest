@@ -4,17 +4,13 @@ on:
   push:
     branches:
       - '*'
-      - '!master'
-      - '!develop'
     tags-ignore:
       - '**'
-  pull_request:
-    types: [closed]
 
 jobs:
   tests:
+    if: github.ref_name != 'develop' &&  github.ref_name != 'master' && (!contains(github.head_commit.message, 'Merge'))
     runs-on: ubuntu-latest
-    if: github.base_ref != 'develop' && github.base_ref != 'master'
     steps:
       - uses: actions/checkout@v3
 
