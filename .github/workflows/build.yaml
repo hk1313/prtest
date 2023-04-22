@@ -3,17 +3,18 @@ name: PR test
 on:
   push:
     branches:
+      - '*'
       - '!master'
       - '!develop'
     tags-ignore:
       - '**'
   pull_request:
-    types: [closed]    
+    types: [closed]
 
 jobs:
   tests:
     runs-on: ubuntu-latest
-    if: github.base_ref != develop || github.base_ref != master
+    if: github.base_ref != develop && github.base_ref != master
     steps:
       - uses: actions/checkout@v3
 
