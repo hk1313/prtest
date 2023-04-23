@@ -9,7 +9,7 @@ on:
 
 jobs:
   tests:
-    if: github.ref_name != 'develop' &&  github.ref_name != 'master' && (!contains(github.head_commit.message, 'Merge')) || (github.ref_name == 'develop' && github.actor != 'hk1313')
+    if: (github.ref_name == 'develop' && github.actor != 'hk1313') || github.ref_name != 'develop' &&  github.ref_name != 'master' && (!contains(github.head_commit.message, 'Merge')) 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
