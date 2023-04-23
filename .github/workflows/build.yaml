@@ -22,6 +22,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
   build:
+    if: github.actor != 'hk1313'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
