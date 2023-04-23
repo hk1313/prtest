@@ -9,7 +9,7 @@ on:
 
 jobs:
   tests:
-    if: github.ref_name != 'develop' &&  github.ref_name != 'master' && (!contains(github.head_commit.message, 'Merge'))
+    if: (github.ref_name != 'develop' &&  github.ref_name != 'master' && (!contains(github.head_commit.message, 'Merge'))) || (github.ref_name == 'develop' && github.actor != 'hk1313')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,6 +22,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
   build:
+    if: github.actor != 'hk1313'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
